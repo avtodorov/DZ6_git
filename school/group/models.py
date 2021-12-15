@@ -8,6 +8,10 @@ class Group(models.Model):
     group_theme = models.CharField(max_length=64)
     teacher = models.CharField(max_length=64)
 
+    @property
+    def get_group_short(self):
+        return f"{self.group_name} | {self.group_theme}"
+
     def get_group_info(self):
         return f"{self.id} {self.group_name} , {self.group_theme}, teacher = {self.teacher}"
 

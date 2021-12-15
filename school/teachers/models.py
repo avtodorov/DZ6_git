@@ -9,6 +9,10 @@ class Teacher(models.Model):
     last_name = models.CharField(max_length=64)
     theme = models.CharField(max_length=64)
 
+    @property
+    def get_teacher(self):
+        return f"{self.first_name} {self.last_name}"
+
     def get_teacher_info(self):
         return f"{self.id} {self.first_name} {self.last_name}, theme = {self.theme}"
 
