@@ -24,7 +24,7 @@ def get_students(request):
     queryset = Student.objects.all()
     context = {'students': queryset}
 
-    return render(request, 'index.html', context)
+    return render(request, 's_index.html', context)
 
 
 # path('students/<int:student_id>/', views.get_student),
