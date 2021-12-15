@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Teacher</title>
+</head>
+<body>
+
+<form action="{% url 'teachers:create_teacher' %}" method="post">
+
+    {{ form.as_p }}
+    <input type="submit">{% csrf_token %}
+
+</body>
+</html>
