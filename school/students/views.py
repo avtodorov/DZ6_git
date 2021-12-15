@@ -1,40 +1,30 @@
 import random
 
 from django.forms.models import model_to_dict
-from django.http import Http404, HttpResponse, JsonResponse
+from django.http import Http404, HttpResponse, HttpResponseRedirect, JsonResponse
+from django.shortcuts import render
+from django.urls import reverse
+from django.views.decorators.http import require_http_methods
 
 import factory
 
 from faker import Faker
 
+from students.forms import StudentForm
 from students.models import Student
-
 
 # Create your views here.
 # path('', views.index),
-def index(request):
-    return HttpResponse('<h1> Welcome to our school !</h1>')
+# def index(request):
+#     return HttpResponse('<h1> Welcome to our school !</h1>')
 
 
 # path('students/', views.get_students),
 def get_students(request):
-    students = [
-        {
-            'first_name': student.first_name,
-            'last_name': student.last_name,
-            'age': student.age
+    queryset = Student.objects.all()
+    context = {'students': queryset}
 
-        }
-        for student in Student.objects.all()  # возвращает QuerySet
-    ]
-
-    data = {
-        # то же самое что: SELECT count(*) FROM students_student
-        'count': Student.objects.count(),
-        'students': students,
-    }
-
-    return JsonResponse(data)  # JsonResponse возвращает только dict
+    return render(request, 'index.html', context)
 
 
 # path('students/<int:student_id>/', views.get_student),
@@ -53,19 +43,26 @@ def get_student(request, student_id):
 
 
 # path('students/create/<int:age>/', views.create_students)
-def create_students(request, age):
-    fake = Faker()
+@require_http_methods(['GET', 'POST'])
+def create_students(request):
+    if request.method == "GET":
+        fake = Faker()
 
-    data = {
-        'first_name': fake.first_name(),
-        'last_name': fake.last_name(),
-        'age': age,
-    }
+        data = {
+            'first_name': fake.first_name(),
+            'last_name': fake.last_name(),
+            'age': random.randint(17, 60),
+        }
 
-    student = Student(**data)
-    student.save()
+        form = StudentForm(initial=data)
 
-    return JsonResponse(data)
+        return render(request, 'create-student.html', context={'form': form})
+
+    form = StudentForm(request.POST)
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect(reverse('students:students_list'))
+    return HttpResponse(str(form.errors), status=400)
 
 
 # path('students/generate_students/', views.generate_students)

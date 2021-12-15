@@ -8,6 +8,10 @@ class Student(models.Model):
     last_name = models.CharField(max_length=64)   # по умолчанию все колонки обязательные, поэтому :
     age = models.PositiveSmallIntegerField()      # параметр null = True, если колонка в БД не обязательная
 
+    @property
+    def full_name(self):
+        return f'{self.first_name} {self.last_name}'
+
     def get_full_info(self):
         return f'{self.id} {self.first_name} {self.last_name}, age = {self.age}'
 
