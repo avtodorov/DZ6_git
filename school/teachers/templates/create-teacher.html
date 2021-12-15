@@ -5,11 +5,14 @@
     <title>Create Teacher</title>
 </head>
 <body>
+{% extends 'mainpage/base.html' %}
+{% block content %}
 
 <form action="{% url 'teachers:create_teacher' %}" method="post">
 
     {{ form.as_p }}
     <input type="submit">{% csrf_token %}
 
+{% endblock content %}
 </body>
 </html>
