@@ -2,18 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Create Student</title>
+    <title>Create Teacher</title>
 </head>
 <body>
 {% extends 'mainpage/base.html' %}
 {% block content %}
 
-<form action="{% url 'students:create_student' %}" method="post">
+<form action="{% url 'teachers:create_teacher' %}" method="post">
 
     {{ form.as_p }}
     <input type="submit">{% csrf_token %}
-
-</form>
 
 {% endblock content %}
 </body>

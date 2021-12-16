@@ -13,11 +13,8 @@ from faker import Faker
 from students.forms import StudentForm
 from students.models import Student
 
-# Create your views here.
-# path('', views.index),
-# def index(request):
-#     return HttpResponse('<h1> Welcome to our school !</h1>')
 
+# Create your views here.
 
 # path('students/', views.get_students),
 def get_students(request):

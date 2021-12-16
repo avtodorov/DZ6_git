@@ -16,19 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-from group import views as group_views
-
-from teachers import views as teachers_views
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     # index
-    # path('', views.index),
+    path('', include('mainpage.urls')),
     # students
     path('students/', include('students.urls')),
+    # teachers
+    path('teachers/', include('teachers.urls')),
     # groups
-    path('groups/', group_views.get_groups),
-    # teacher
-    path('teachers/', teachers_views.get_teachers),
+    path('groups/', include('group.urls')),
 
 ]

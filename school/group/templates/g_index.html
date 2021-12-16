@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Group List</title>
+</head>
+<body>
+{% extends 'mainpage/base.html' %}
+{% block content %}
+
+<a href="{% url 'group:create_group' %}">Create new group</a>
+
+<h3>Group List</h3>
+<ul>
+    {% for group in groups %}
+        <li>
+        <a href="{% url 'group:group_details' group.id%}">
+            {{ forloop.counter }} . {{ group.get_group_short }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock content %}
+</body>
+</html>
