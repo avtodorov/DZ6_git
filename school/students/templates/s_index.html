@@ -6,7 +6,8 @@
 </head>
 <body>
 
-<h1>Welcome to our school</h1>
+{% extends 'mainpage/base.html' %}
+{% block content %}
 
 <a href="{% url 'students:create_student' %}">Create student</a>
 
@@ -21,6 +22,7 @@
     {% endfor %}
 </ul>
 
+{% endblock content %}
 
 
 </body>

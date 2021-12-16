@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<p>
+    <a href="{% url 'mainpage:index' %}">Mainpage</a> -
+    <a href="{% url 'students:students_list' %}">Students</a> -
+    <a href="{% url 'teachers:teachers_list' %}">Teachers</a> -
+    <a href="{% url 'group:group_index' %}">Groups</a>
+    <p>--------------------------------------------------</p>
+</p>
+
+
+{% block content %} {% endblock content %}
