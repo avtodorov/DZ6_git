@@ -13,6 +13,8 @@ class GroupForm(forms.ModelForm):
             raise ValidationError(f"This theme is not aloud.\n "
                                   f"Choices are: {' '.join(themes)}")
 
+        return theme
+
     class Meta:
         model = Group
         fields = (

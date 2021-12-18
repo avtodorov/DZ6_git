@@ -23,7 +23,7 @@ def get_students(request):
     return render(request, 'students/s_index.html', context)
 
 
-# path('students/<int:student_id>/', views.get_student),
+# path('<int:student_id>/edit/', views.edit_student, name='edit'),
 def edit_student(request, student_id):
     student = get_object_or_404(Student, pk=student_id)
 
@@ -35,13 +35,14 @@ def edit_student(request, student_id):
 
     if request.method == 'POST':
         form = StudentForm(request.POST, instance=student)
+        context = {'form': form}
 
         if form.is_valid():
             form.save()
 
             return HttpResponseRedirect(reverse('students:list'))
 
-        return render(request, 'students/edit.html', context={'form': form})
+        return render(request, 'students/edit.html', context)
 
     return HttpResponse(status=405)
 

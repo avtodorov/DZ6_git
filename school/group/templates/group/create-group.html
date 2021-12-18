@@ -8,7 +8,7 @@
 {% extends 'mainpage/base.html' %}
 {% block content %}
 
-<form action="{% url 'group:create_group' %}" method="post">
+<form action="{% url 'group:create' %}" method="post">
 
     {{ form.as_p }}
     <input type="submit">{% csrf_token %}

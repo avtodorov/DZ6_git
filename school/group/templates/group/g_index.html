@@ -8,13 +8,13 @@
 {% extends 'mainpage/base.html' %}
 {% block content %}
 
-<a href="{% url 'group:create_group' %}">Create new group</a>
+<a href="{% url 'group:create' %}">Create new group</a>
 
 <h3>Group List</h3>
 <ul>
     {% for group in groups %}
         <li>
-        <a href="{% url 'group:group_details' group.id%}">
+        <a href="{% url 'group:details' group.id%}">
             {{ forloop.counter }} . {{ group.get_group_short }}</a>
     </li>
     {% endfor %}
