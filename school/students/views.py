@@ -2,7 +2,7 @@ import random
 
 from django.forms.models import model_to_dict
 from django.http import Http404, HttpResponse, HttpResponseRedirect, JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views.decorators.http import require_http_methods
 
@@ -21,22 +21,30 @@ def get_students(request):
     queryset = Student.objects.all()
     context = {'students': queryset}
 
-    return render(request, 's_index.html', context)
+    return render(request, 'students/s_index.html', context)
 
 
 # path('students/<int:student_id>/', views.get_student),
-def get_student(request, student_id):
-    try:
-        student = Student.objects.get(pk=student_id)
-        response = model_to_dict(student)
+def edit_student(request, student_id):
+    student = get_object_or_404(Student, pk=student_id)
 
-    except Student.DoesNotExist:
-        # response = {
-        #     'error': f'Does not Exist student with id ={student_id}'
-        # }
-        raise Http404
+    if request.method == 'GET':
+        form = StudentForm(instance=student)
+        context = {'form': form}
 
-    return JsonResponse(response)
+        return render(request, 'students/edit.html', context)
+
+    if request.method == 'POST':
+        form = StudentForm(request.POST, instance=student)
+
+        if form.is_valid():
+            form.save()
+
+            return HttpResponseRedirect(reverse('students:list'))
+
+        return render(request, 'students/edit.html', context={'form': form})
+
+    return HttpResponse(status=405)
 
 
 # path('students/create/<int:age>/', views.create_students)
@@ -53,12 +61,12 @@ def create_students(request):
 
         form = StudentForm(initial=data)
 
-        return render(request, 'create-student.html', context={'form': form})
+        return render(request, 'students/create.html', context={'form': form})
 
     form = StudentForm(request.POST)
     if form.is_valid():
         form.save()
-        return HttpResponseRedirect(reverse('students:students_list'))
+        return HttpResponseRedirect(reverse('students:list'))
     return HttpResponse(str(form.errors), status=400)
 
 
