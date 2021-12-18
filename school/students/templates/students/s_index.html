@@ -9,14 +9,14 @@
 {% extends 'mainpage/base.html' %}
 {% block content %}
 
-<a href="{% url 'students:create_student' %}">Create student</a>
+<a href="{% url 'students:create' %}">Create student</a>
 
 <h3>Students list</h3>
 <ul>
     {% for student in students %}
 
         <li>
-            <a href="{% url 'students:student_details' student.id %}">{{ forloop.counter }} . {{ student.full_name }}</a>
+            <a href="{% url 'students:edit' student.id %}">{{ forloop.counter }} . {{ student.full_name }}</a>
         </li>
 
     {% endfor %}

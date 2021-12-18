@@ -2,13 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Create Student</title>
+    <title>Edit student</title>
 </head>
 <body>
 {% extends 'mainpage/base.html' %}
 {% block content %}
 
-<form action="{% url 'students:create_student' %}" method="post">
+{% for error in form.non_field_errors %}
+    {{ error }}
+{% endfor %}
+
+<form action="{% url 'students:edit' student_id=form.instance.id%}" method="post">
 
     {{ form.as_p }}
     <input type="submit">{% csrf_token %}
@@ -16,5 +20,6 @@
 </form>
 
 {% endblock content %}
+
 </body>
 </html>
