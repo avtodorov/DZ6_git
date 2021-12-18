@@ -9,7 +9,7 @@ from .models import Student
 
 class StudentAdmin(ModelAdmin):
     list_display = ('first_name', 'last_name', 'age',)
-    list_display_links = ('first_name', ) # links from admin to edit
+    list_display_links = ('first_name', )  # links from admin to edit
     fields = ('first_name', 'last_name', 'age',)
     # readonly_fields = ('age',)
 
