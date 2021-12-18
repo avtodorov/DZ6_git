@@ -9,13 +9,13 @@
 {% extends 'mainpage/base.html' %}
 {% block content %}
 
-<a href="{% url 'teachers:create_teacher' %}">Create new teacher</a>
+<a href="{% url 'teachers:create' %}">Create new teacher</a>
 
 <h2>List of teachers:</h2>
 <ul>
     {% for teacher in teachers %}
         <li>
-            <a href="{% url 'teachers:teacher_details' teacher.id%}">
+            <a href="{% url 'teachers:edit' teacher.id%}">
                 {{ forloop.counter }}. {{ teacher.get_teacher }} </a>
         </li>
     {% endfor %}
