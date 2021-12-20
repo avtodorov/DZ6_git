@@ -8,7 +8,7 @@
 {% extends 'mainpage/base.html' %}
 {% block content %}
 
-<form action="{% url 'teachers:create_teacher' %}" method="post">
+<form action="{% url 'teachers:create' %}" method="post">
 
     {{ form.as_p }}
     <input type="submit">{% csrf_token %}

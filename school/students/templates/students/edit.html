@@ -15,7 +15,12 @@
 <form action="{% url 'students:edit' student_id=form.instance.id%}" method="post">
 
     {{ form.as_p }}
-    <input type="submit">{% csrf_token %}
+    <input type="submit" value="Edit this student" style="background-color: darkseagreen;">{% csrf_token %}
+</form>
+
+<form action="{% url 'students:delete_student' student_id=form.instance.id%}" method="post">
+<br>
+    <input type="submit" value="Delete this student" style="background-color: firebrick;">{% csrf_token %}
 
 </form>
 

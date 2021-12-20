@@ -47,6 +47,18 @@ def edit_student(request, student_id):
     return HttpResponse(status=405)
 
 
+# path('<int:student_id>/delete/', views.delete_student, name='delete_student')
+@require_http_methods(['GET', 'POST'])
+def delete_student(request, student_id):
+    student = get_object_or_404(Student, pk=student_id)
+
+    if request.method == 'POST':
+        student.delete()
+        return HttpResponseRedirect(reverse('students:list'))
+
+    return render(request, 'students/edit.html')  # if GET
+
+
 # path('students/create/<int:age>/', views.create_students)
 @require_http_methods(['GET', 'POST'])
 def create_students(request):
