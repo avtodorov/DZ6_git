@@ -67,6 +67,7 @@ def create_teacher(request):
             'first_name': fake.first_name(),
             'last_name': fake.last_name(),
             'theme': theme[(random.randint(0, 7))],
+            'phone': '+380939399992',
         }
 
         form = TeacherForm(initial=data)
