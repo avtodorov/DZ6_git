@@ -20,5 +20,6 @@ class TeacherForm(forms.ModelForm):
         fields = (
             'first_name',
             'last_name',
-            'theme'
+            'theme',
+            'phone'
         )
