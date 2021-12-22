@@ -8,10 +8,10 @@ from .models import Student
 
 
 class StudentAdmin(ModelAdmin):
-    list_display = ('first_name', 'last_name', 'age',)
+    list_display = ('first_name', 'last_name', 'age', 'rating', 'grade',)
     list_display_links = ('first_name', )  # links from admin to edit
-    fields = ('first_name', 'last_name', 'age',)
-    # readonly_fields = ('age',)
+    fields = ('first_name', 'last_name', 'age', 'rating', 'grade',)
+    readonly_fields = ('age', 'grade')
 
     def get_queryset(self, request):
         return Student.objects.all()
