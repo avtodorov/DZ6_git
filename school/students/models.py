@@ -1,3 +1,4 @@
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
 
@@ -7,6 +8,13 @@ class Student(models.Model):
     first_name = models.CharField(max_length=64)  # тип данных Char (строчный), длина 64 символа
     last_name = models.CharField(max_length=64)   # по умолчанию все колонки обязательные, поэтому :
     age = models.PositiveSmallIntegerField()      # параметр null = True, если колонка в БД не обязательная
+    rating = models.PositiveSmallIntegerField(
+        validators=[
+            MinValueValidator(0),
+            MaxValueValidator(100),
+        ]
+    )
+    grade = models.CharField(max_length=1)
 
     @property
     def full_name(self):
