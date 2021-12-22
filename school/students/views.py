@@ -69,6 +69,8 @@ def create_students(request):
             'first_name': fake.first_name(),
             'last_name': fake.last_name(),
             'age': random.randint(17, 60),
+            'rating': 0,
+            'phone': '+380939399992'
         }
 
         form = StudentForm(initial=data)
