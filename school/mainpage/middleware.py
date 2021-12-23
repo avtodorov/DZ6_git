@@ -1,5 +1,4 @@
 import time
-import re
 
 from mainpage.models import Logger
 
