@@ -1,4 +1,5 @@
 import time
+import re
 
 from mainpage.models import Logger
 
@@ -21,7 +22,6 @@ class LogMiddleware:
         estimation = round((time.time() - epoch) * 1000, 2)
 
         if '/admin/' in path:
-            logger = Logger.objects.create(method=method, path=path, execution_time=estimation)
-            logger.save()
+            Logger.objects.create(method=method, path=path, execution_time=estimation)
 
         return response

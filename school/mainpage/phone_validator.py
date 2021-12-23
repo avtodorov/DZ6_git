@@ -1,6 +1,6 @@
 from django.core.exceptions import ValidationError
 
-# number_example = '+380939399996' - VALID
+# number_example = '+380939399996'  # - VALID
 
 
 def validate_phone(number):
@@ -10,12 +10,10 @@ def validate_phone(number):
     if len(number) != 13:
         raise ValidationError(f'{number} is not a correct phone number'
                               f' LengthError')
-    else:
-        try:
-            int(number[1:])
-        except ValueError:
-            raise ValidationError(f'{number} is not a correct phone number'
-                                  f' NumeralError, all characters should be numbers')
+
+    if not str.isdigit(number[1:]):
+        raise ValidationError(f'{number} is not a correct phone number'
+                              f'NumeralError, all characters should be numbers')
 
     #  second check -> country code
     if number[0:3] != '+38':
