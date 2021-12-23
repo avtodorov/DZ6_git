@@ -1,13 +1,15 @@
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
+from mainpage.phone_validator import validate_phone
+
 
 # Create your models here.
 class Student(models.Model):
     # id = models.BigAutoField
     first_name = models.CharField(max_length=64)  # тип данных Char (строчный), длина 64 символа
-    last_name = models.CharField(max_length=64)   # по умолчанию все колонки обязательные, поэтому :
-    age = models.PositiveSmallIntegerField()      # параметр null = True, если колонка в БД не обязательная
+    last_name = models.CharField(max_length=64)  # по умолчанию все колонки обязательные, поэтому :
+    age = models.PositiveSmallIntegerField()  # параметр null = True, если колонка в БД не обязательная
     rating = models.PositiveSmallIntegerField(
         validators=[
             MinValueValidator(0),
@@ -15,6 +17,10 @@ class Student(models.Model):
         ]
     )
     grade = models.CharField(max_length=1)
+    phone = models.CharField(
+        max_length=13,
+        validators=[validate_phone]
+    )
 
     @property
     def full_name(self):
