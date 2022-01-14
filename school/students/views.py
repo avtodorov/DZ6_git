@@ -11,6 +11,7 @@ from faker import Faker
 
 from students.forms import StudentForm
 from students.models import Student
+# from students.tasks import calculate_students
 
 
 # Create your views here.
@@ -19,6 +20,9 @@ from students.models import Student
 def get_students(request):
     queryset = Student.objects.all()
     context = {'students': queryset}
+
+    # result = calculate_students.delay()
+    # # result.get()
 
     return render(request, 'students/s_index.html', context)
 
