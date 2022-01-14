@@ -9,7 +9,14 @@
 
 {% block content %}
 <p>Welcome to our school</p>
-    <p>Browse the links at the top to see what we have...</p>
+    <p>Browse the links at the top to see what we have...</p></br>
+    <p><h4>CONTACT US:</h4></p>
+    <form action="{% url 'mainpage:index' %}" method="post">
+
+    {{ form.as_p }}
+    <input type="submit">{% csrf_token %}
+
+</form>
 {% endblock content %}
 </body>
 </html>
